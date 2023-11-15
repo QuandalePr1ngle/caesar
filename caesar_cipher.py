@@ -1,38 +1,47 @@
-a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+err = 1
+import time
 
-def e(t, o):
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def Encrypt(text, rotation): #Encrypts the entered text
   r = ""
-  for c in t:
-    if (a.find(c) == -1):
-      r += c
+  for character in text: #For every characrer in text  
+    if (alphabet.find(character) == -1):
+      r += character
     else:
-      r += (a[(a.find(c) + o) % len(a)])
+      r += (alphabet[(alphabet.find(character) + rotation) % len(alphabet)])
   return r
 
-def d(t, o):
+def Decrypt(text, rotation): #Decrypts the entered text
   r = ""
-  for c in t:
-    if (a.find(c) == -1):
+  for c in text:
+    if (alphabet.find(c) == -1):
       r += c
     else:
-      r += (a[(a.find(c) - o) % len(a)])
+      r += (alphabet[(alphabet.find(c) - rotation) % len(alphabet)])
   return r
 
-w = """
+ChooseMode = """
 1. Encrypt text
 2. Decrypt text
 3. Bruteforce all rotations
 Choose mode: """
-mode = int(input(w))
-
+mode = int(input(ChooseMode))
 if mode == 1:
-  text = input("Enter the text: ")
+  text = input("Enter the text (Use CAPS): ")
   rotation = int(input("Enter the rotation: "))
-  print("Encrypted: " + e(text, rotation))
+  print("Encrypted: " + Encrypt(text, rotation))
 elif mode == 2:
-  text = input("Enter the text: ")
+  text = input("Enter the text (Use CAPS): ")
   rotation = int(input("Enter the rotation: "))
-  print("Decrypted: " + d(text, rotation))
+  print("Decrypted: " + Decrypt(text, rotation))
 elif mode == 3:
+  text = input("Enter the text (Use CAPS): ")
   print("Bruteforcing...")
-  print("But I don't know how to do it, sorry ¯\_(ツ)_/¯")
+  time.sleep(1)
+  for n in range(26):
+    time.sleep(0.1)
+    print(str(n)+" Decrypted: " + Decrypt(text, n))
+  
+  
+  
